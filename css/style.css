@@ -1,0 +1,59 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: monospace;
+}
+
+body {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    margin-top: 50px;
+    width: 100%;
+    background-color: #fdfdfd;
+}
+
+#file {
+    margin-bottom: 40px;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    flex-flow: column wrap;
+    width: 80%;
+}
+
+#result {
+    display: flex;
+    flex-flow: row wrap;
+    width: 100%;
+    gap: 10px;
+}
+
+#result > * {
+    max-width: 150px;
+    margin: auto;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+.texto {
+    margin-bottom: 100px;
+}
+
+.foo {
+    margin-top: 100px;
+}
+
+.foo button {
+    padding: 12px 8px 10px 8px;
+    outline: none;
+    cursor: pointer;
+    border: 1px solid black;
+    background-color: transparent;
+    font-weight: bolder;
+}
