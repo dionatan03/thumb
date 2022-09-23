@@ -23,24 +23,24 @@ window.addEventListener("load", () => {
 
 //função faz com que a imagem seja escalada automaticamente para o novo tamanho.
 function resizeImage(src, options) {
-  return loadImage(document.createElement("img"), src).then((image)=> {
+  return loadImage(document.createElement("img"), src).then((image) => {
     let canvas = document.createElement("canvas");
 
     if (options.width && !options.height) {
-      options.height = image.height * (options.width / image.width);
-
-    } else if (!options.width && options.height) {
+      options.height = options.width * (image.height / image.width);
+      console.log(options.height, options.width)
+      //options.height = image.height * (options.width / image.width);
+    } /*else if (!options.width && options.height) {
       options.width = image.width * (options.height / image.height);
-    }
+    }*/
 
-    Object.assign(canvas, options);
+    Object.assign(canvas, 1.0);
     canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
     return new Promise((resolve) =>
-    canvas.toBlob(resolve, options.type || "image/png", options.quality)
+      canvas.toBlob("image/png", 0.70)
     );
-    });
+  });
 }
-
 
 //função que carrega as imagens e gera os downloads automaticos.
 function downloadURI(uri, name) {
@@ -69,6 +69,6 @@ button.addEventListener("click", () => {
   let contador = 1;
   const images = document.querySelectorAll("#result img");
   images.forEach(({ src }) => {
-    downloadURI(src, 'imagem' + contador++);
+    downloadURI(src, "imagem" + contador++);
   });
 });

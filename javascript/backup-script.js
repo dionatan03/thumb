@@ -1,20 +1,18 @@
 const button = document.querySelector(".btn-download");
-
-// cria uma <tag img> 'imagem'.
 const createImg = () => document.createElement("img");
 
 //pega todas as imagem e renderiza na page em arrays.
 //a cada seleção será limpa e iniciada.
-window.addEventListener("load", function () {
+window.addEventListener("load", () => {
   let file = document.querySelector("#file");
 
-  file.addEventListener("change", function () {
+  file.addEventListener("change", () => {
     const { files } = file;
     document.querySelector("#result").innerHTML = "";
     Array.from(files).forEach((image) => {
       let src = URL.createObjectURL(image);
 
-      resizeImage(src, { width: 500 }).then(function (blob) {
+      resizeImage(src, { width: 410 }).then((blob) => {
         const resizedImg = createImg();
         resizedImg.src = URL.createObjectURL(blob);
         document.querySelector("#result").appendChild(resizedImg);
@@ -25,7 +23,7 @@ window.addEventListener("load", function () {
 
 //função faz com que a imagem seja escalada automaticamente para o novo tamanho.
 function resizeImage(src, options) {
-  return loadImage(document.createElement("img"), src).then(function (image) {
+  return loadImage(document.createElement("img"), src).then((image) => {
     let canvas = document.createElement("canvas");
 
     if (options.width && !options.height) {
@@ -35,12 +33,10 @@ function resizeImage(src, options) {
     }
 
     Object.assign(canvas, options);
-
     canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
-
-    return new Promise(function (resolve) {
-      canvas.toBlob(resolve, options.type || "image/png", options.quality);
-    });
+    return new Promise((resolve) =>
+      canvas.toBlob(resolve, options.type || "image/png", options.quality)
+    );
   });
 }
 
@@ -61,17 +57,16 @@ function loadImage(img, src) {
     img.src = src;
     img.completed
       ? resolve(img)
-      : img.addEventListener("load", function () {
-          resolve(img);
-        });
+      : img.addEventListener("load", () => resolve(img));
     img.addEventListener("error", reject);
   });
 }
 
 //botão que ira iniciar o download de N arquivos de imagens
 button.addEventListener("click", () => {
+  let contador = 1;
   const images = document.querySelectorAll("#result img");
-  images.forEach(({src}) => {
-    downloadURI(src, 't1');
+  images.forEach(({ src }) => {
+    downloadURI(src, "imagem" + contador++);
   });
 });

@@ -35,6 +35,11 @@ body {
 #result img {
     border: 1px solid royalblue;
     box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.4);
+    image-rendering: optimizeQuality;
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: optimize-contrast;
+    -ms-interpolation-mode: nearest-neighbor;
 }
 
 #result img:hover {
@@ -71,6 +76,6 @@ header {
 
 .foo button:hover {
     border: 1px solid rgb(185, 185, 185);
-    color: rgb(124, 232, 62);
+    color: rgb(94, 177, 45);
     box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.4);
 }
