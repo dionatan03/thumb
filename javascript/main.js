@@ -27,17 +27,16 @@ function resizeImage(src, options) {
     let canvas = document.createElement("canvas");
 
     if (options.width && !options.height) {
-      options.height = options.width * (image.height / image.width);
-      console.log(options.height, options.width)
-      //options.height = image.height * (options.width / image.width);
-    } /*else if (!options.width && options.height) {
+      options.height = image.height * (options.width / image.width);
+    } else if (!options.width && options.height) {
       options.width = image.width * (options.height / image.height);
-    }*/
+    }
 
-    Object.assign(canvas, 1.0);
+    Object.assign(canvas, options);
     canvas.getContext("2d").drawImage(image, 0, 0, canvas.width, canvas.height);
     return new Promise((resolve) =>
-      canvas.toBlob("image/png", 0.70)
+      canvas.toBlob(resolve, options.type || "image/png", options.quality),
+      options.quality = 0.70
     );
   });
 }
